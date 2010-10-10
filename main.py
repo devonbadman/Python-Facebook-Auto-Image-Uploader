@@ -66,6 +66,7 @@ def waitLogin(fb):
                 print "I was waiting for you to Login."
                 raise
 
+
 def Login():
     # Insert your appid and secretid here
     app_id=""
