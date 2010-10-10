@@ -53,7 +53,12 @@ def capture():
 def upload(file, time, timename, fb):
     file.save("%s.jpeg" % timename)
     #print "saved"
+    try:
+        session = fb.auth.getSession()
+    except facebook.FacebookError:
+        fb = login()
     fb.photos.upload("%s.jpeg" % timename,"pythonimages", time)
+
 
 def waitLogin(fb):
         """ Wait the user to login. """
