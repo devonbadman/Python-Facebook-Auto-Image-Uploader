@@ -20,7 +20,7 @@
 #               * with this program; if not, write to the Free Software Foundation, Inc.,
 #               * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-#Some code (c) Suraj Sapkota 2009
+# Some code (c) Suraj Sapkota 2009
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
@@ -35,9 +35,6 @@ import mimetypes
 # Hide the Warning displayed by facebook API
 os.system("clear")
 
-# Only files with the following mimetypes are uploaded
-known_mimetypes_to_upload=["image/jpeg", "image/png", "image/gif"]
-
 def function():
     if strftime("%H")==strftime("%M") and strftime("%H")==strftime("%S"):
         return "true"
@@ -50,15 +47,14 @@ def capture():
     im = cam.getImage()
     return im
 
-def upload(file, time, timename, fb):
-    file.save("%s.jpeg" % timename)
+def upload(im, time, timename, fb):
+    im.save("%s.jpeg" % timename)
     #print "saved"
     try:
         session = fb.auth.getSession()
     except facebook.FacebookError:
-        fb = login()
+        fb = Login()
     fb.photos.upload("%s.jpeg" % timename,"pythonimages", time)
-
 
 def waitLogin(fb):
         """ Wait the user to login. """
@@ -74,7 +70,7 @@ def waitLogin(fb):
                 raise
 
 def Login():
-    # Insert your appid and secretid here
+    #insert your app id and secret id here
     app_id=""
     app_sec=""
 
@@ -99,8 +95,8 @@ def main():
         if strftime("%H")==strftime("%M") and strftime("%H")==strftime("%S"):
             time=strftime("%H:%M:%S %d/%m/%y")
             timename=strftime("%H%M%S%d%m%y")
-            file=capture()
-            upload(file, time, timename, fb)
+            im=capture()
+            upload(im, time, timename, fb)
 
 if __name__ == '__main__':
     main()
